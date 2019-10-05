@@ -10,6 +10,7 @@ import sys
 
 from keras import applications
 from keras import layers
+from keras.layers import concatenate
 from keras import models
 from keras import optimizers
 from keras.preprocessing import image
@@ -32,16 +33,16 @@ cache_dir = os.path.join(path, 'cache')
 # image dimensions
 #
 
-img_width = 55
-img_height = 35
-img_channels = 1
+img_width = 640
+img_height = 480
+img_channels = 3
 
 #
 # training params
 #
 
 nb_steps = 10000
-batch_size = 512
+batch_size = 16
 k_d = 1  # number of discriminator updates per step
 k_g = 2  # number of generative network updates per step
 log_interval = 100
@@ -68,8 +69,8 @@ def refiner_network(input_image_tensor):
         y = layers.Convolution2D(nb_features, nb_kernel_rows, nb_kernel_cols, border_mode='same')(input_features)
         y = layers.Activation('relu')(y)
         y = layers.Convolution2D(nb_features, nb_kernel_rows, nb_kernel_cols, border_mode='same')(y)
-
-        y = layers.merge([input_features, y], mode='sum')
+        print("The input features %s and y %s" % (str(input_features), str(y)))
+        y = layers.concatenate([input_features, y])
         return layers.Activation('relu')(y)
 
     # an input image of size w × h is convolved with 3 × 3 filters that output 64 feature maps
@@ -110,6 +111,7 @@ def adversarial_training(synthesis_eyes_dir, mpii_gaze_dir, refiner_model_path=N
     #
 
     synthetic_image_tensor = layers.Input(shape=(img_height, img_width, img_channels))
+    print('Tensor DIM: ' + str(synthetic_image_tensor.get_shape().as_list()))
     refined_image_tensor = refiner_network(synthetic_image_tensor)
 
     refined_or_real_image_tensor = layers.Input(shape=(img_height, img_width, img_channels))
@@ -173,8 +175,7 @@ def adversarial_training(synthesis_eyes_dir, mpii_gaze_dir, refiner_model_path=N
     #
 
     datagen = image.ImageDataGenerator(
-        preprocessing_function=applications.xception.preprocess_input,
-        dim_ordering='tf')
+        preprocessing_function=applications.xception.preprocess_input)
 
     flow_from_directory_params = {'target_size': (img_height, img_width),
                                   'color_mode': 'grayscale' if img_channels == 1 else 'rgb',
