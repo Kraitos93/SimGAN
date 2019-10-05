@@ -42,7 +42,7 @@ img_channels = 3
 #
 
 nb_steps = 10000
-batch_size = 16
+batch_size = 8
 k_d = 1  # number of discriminator updates per step
 k_g = 2  # number of generative network updates per step
 log_interval = 100
