@@ -34,8 +34,8 @@ cache_dir = os.path.join(path, 'cache')
 # image dimensions
 #
 
-img_width = 256
-img_height = 256
+img_width = 95
+img_height = 95
 img_channels = 3
 
 #
