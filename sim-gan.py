@@ -34,8 +34,8 @@ cache_dir = os.path.join(path, 'cache')
 # image dimensions
 #
 
-img_width = 95
-img_height = 95
+img_width = 55
+img_height = 35
 img_channels = 3
 
 #
@@ -43,7 +43,7 @@ img_channels = 3
 #
 
 nb_steps = 10000
-batch_size = 8
+batch_size = 512
 k_d = 1  # number of discriminator updates per step
 k_g = 2  # number of generative network updates per step
 log_interval = 100
