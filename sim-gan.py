@@ -8,6 +8,7 @@ Note: Only Python 3 support currently.
 import os
 import sys
 
+from tensorflow import keras
 from keras import applications
 from keras import layers
 from keras.layers import concatenate
