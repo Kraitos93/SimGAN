@@ -8,13 +8,6 @@ Note: Only Python 3 support currently.
 import os
 import sys
 
-
-from tensorflow import keras
-### hack tf-keras to appear as top level keras
-import sys
-sys.modules['keras'] = keras
-### end of hack
-
 from keras import applications
 from keras import layers
 from keras.layers import concatenate
