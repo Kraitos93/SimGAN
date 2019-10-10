@@ -32,8 +32,8 @@ from utils.image_history_buffer import ImageHistoryBuffer
 # directories
 #
 
-#path = os.path.dirname(os.path.abspath(__file__))
-path = "/content/gdrive/My Drive/Datalogi - Master Thesis/Analysis/SimGAN"
+path = os.path.dirname(os.path.abspath(__file__))
+#path = "/content/gdrive/My Drive/Datalogi - Master Thesis/Analysis/SimGAN"
 cache_dir = os.path.join(path, 'cache')
 
 #
