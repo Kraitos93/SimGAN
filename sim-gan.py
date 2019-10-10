@@ -8,20 +8,27 @@ Note: Only Python 3 support currently.
 import os
 import sys
 
-#from keras import applications
-#from keras import layers
-#from keras.layers import concatenate
-#from keras import models
-#from keras import optimizers
-#from keras.preprocessing import image
+
+from tensorflow import keras
+### hack tf-keras to appear as top level keras
+import sys
+sys.modules['keras'] = keras
+### end of hack
+
+from keras import applications
+from keras import layers
+from keras.layers import concatenate
+from keras import models
+from keras import optimizers
+from keras.preprocessing import image
 import numpy as np
 import tensorflow as tf
-from tensorflow.python.keras import applications
-from tensorflow.python.keras import layers
-from tensorflow.python.keras.layers import concatenate
-from tensorflow.python.keras import models
-from tensorflow.python.keras import optimizers
-from tensorflow.python.keras.preprocessing import image
+#from tensorflow.python.keras import applications
+#from tensorflow.python.keras import layers
+#from tensorflow.python.keras.layers import concatenate
+#from tensorflow.python.keras import models
+#from tensorflow.python.keras import optimizers
+#from tensorflow.python.keras.preprocessing import image
 
 from dlutils import plot_image_batch_w_labels
 
